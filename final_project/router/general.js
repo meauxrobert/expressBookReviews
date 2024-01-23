@@ -148,6 +148,28 @@ public_users.get('/books/author/:author',function (req, res) {
   });
 });
 
+// TASK 13 - Get book details based on title
+public_users.get('/books/title/:title',function (req, res) {
+  const get_books_title = new Promise((resolve, reject) => {
+    let booksbytitle = [];
+    let isbns = Object.keys(books);
+    isbns.forEach((isbn) => {
+      if(books[isbn]["title"] === req.params.title) {
+        booksbytitle.push({"isbn":isbn,
+                            "author":books[isbn]["author"],
+                            "reviews":books[isbn]["reviews"]});
+      resolve(res.send(JSON.stringify({booksbytitle}, null, 4)));
+      }
+    });
+    reject(res.send("The mentioned title does not exist "))
+  });
+  get_books_title.then(function(){
+    console.log("Promise is resolved");
+  }).catch(function () {
+    console.log('The mentioned title does not exist');
+  });
+});
+
 
 module.exports.general = public_users;
 
