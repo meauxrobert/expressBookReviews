@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 let books = require("./booksdb.js");
-const regd_users = express.Router();
+const router = express.Router();
 
 let users = [];
 
@@ -32,7 +32,7 @@ const authenticatedUser = (username,password)=>{ //returns boolean
 }
 
 //only registered users can login
-regd_users.post("/login", (req,res) => {
+app.post("/login", (req,res) => {
     //Write your code here
   const username = req.body.username;
   const password = req.body.password;
